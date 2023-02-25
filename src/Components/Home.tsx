@@ -13,11 +13,23 @@ function Home() {
 
   const webcamRef = useRef<any>(null);
   const [img, setImg] = useState(null)
-  const [text, setText] = useState("");
+  const [text, setText] = useState<number>(0);
   
   function capture() {
     const imageSrc = webcamRef.current.getScreenshot();
     setImg(imageSrc);
+  }
+  
+  function getPercentage(word : string) {
+    let percentage = "";
+    for (let i = 0; i < word.length; i++) {
+      if (word.charCodeAt(i) > 32 && word.charCodeAt(i) < 128) {
+        percentage += word[i];
+      } else {
+        continue;
+      }
+    }
+    setText((percentage.length / word.length) * 100);
   }
   
   useEffect(() => {
@@ -27,7 +39,7 @@ function Home() {
         'eng',
         { logger: m => console.log(m) }
       ).then(({ data: { text } }) => {
-        setText(text);
+        getPercentage(text);
       })
     }
   }, [img]);
@@ -44,7 +56,7 @@ function Home() {
 
       {img && <div>
         <img src={img} />
-        <div>{text}</div>
+        <div>{text}%</div>
         </div>}
     </div>)
 }
