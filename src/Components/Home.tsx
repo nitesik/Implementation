@@ -23,13 +23,13 @@ function Home() {
   function getPercentage(word : string) {
     let percentage = "";
     for (let i = 0; i < word.length; i++) {
-      if (word.charCodeAt(i) > 32 && word.charCodeAt(i) < 128) {
+      if (word.charCodeAt(i) > 65 && word.charCodeAt(i) < 122) {
         percentage += word[i];
       } else {
         continue;
       }
     }
-    setText((percentage.length / word.length) * 100);
+    setText(100 - ((percentage.length / word.length) * 100));
   }
   
   useEffect(() => {
@@ -56,7 +56,7 @@ function Home() {
 
       {img && <div>
         <img src={img} />
-        <div>{text}%</div>
+        <div>{text.toFixed(2)}%</div>
         </div>}
     </div>)
 }
