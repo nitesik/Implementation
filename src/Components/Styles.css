@@ -12,8 +12,9 @@
 
 }
 
-.container img {
-  height: 120px;
-  width: 220px;
+.container .img {
+  height: 300px;
+  width: 370px;
   margin-top: 50px;
+  background-color: red;
 }
